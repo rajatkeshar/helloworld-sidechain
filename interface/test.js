@@ -1,5 +1,5 @@
-app.route.get('/helloworld',  async function (req) {
-  return { message: 'helloworld' }
+app.route.get('/test',  async function (req) {
+  return { message: 'DAPP is ready' }
 })
 
 app.route.put('/ping/:seq',  async function (req) {
