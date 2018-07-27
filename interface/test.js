@@ -1,5 +1,5 @@
 app.route.get('/test',  async function (req) {
-  return { message: 'DAPP is ready' }
+  return { message: 'DAPP API is ready' }
 })
 
 app.route.put('/ping/:seq',  async function (req) {
