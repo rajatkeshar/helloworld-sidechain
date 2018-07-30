@@ -12,3 +12,71 @@ app.route.post('/sleep',  async function (req, cb) {
   }
   await new Promise(resolve => setTimeout(resolve, Math.floor(Number(req.query.seconds) * 1000)))
 })
+
+app.route.put('/withdrawal', async function (req, cb) {
+  let fee = String(0.1 * 100000000)
+  let type = 2 // withdraw money to mainchain
+  let options = {
+    fee: fee,
+    type: type,
+    args: JSON.stringify(['XAS', '10000000000'])
+  }
+  let secret = req.query.secret;
+
+  let transaction = aschJS.dapp.createInnerTransaction(options, secret)
+
+  let dappId = req.query.dappId;
+
+  let url = `http://localhost:9305/api/dapps/${dappId}/transactions/signed`
+  let data = {
+    transaction: transaction
+  }
+
+  let headers = {
+    magic: '594fe0f3',
+    version: ''
+  }
+
+  var res = await axios.put(url, data, headers)
+
+  console.log("res: ", res.data);
+  if(res && res.data && res.data.transactionId) {
+    return {transactionId: res.data.transactionId};
+  } else {
+    return {error: "error occured"};
+  }
+});
+
+app.route.put('/transactions/inTransfer', async function (req, cb) {
+  let fee = String(0.1 * 100000000)
+  let type = 3 // transaction within sidechain
+  let options = {
+    fee: fee,
+    type: type,
+    args: JSON.stringify(['XAS', '100000000'])
+  }
+  let secret = req.query.secret;
+
+  let transaction = aschJS.dapp.createInnerTransaction(options, secret)
+
+  let dappId = req.query.dappId;
+
+  let url = `http://localhost:9305/api/dapps/${dappId}/transactions/signed`
+  let data = {
+    transaction: transaction
+  }
+
+  let headers = {
+    magic: '594fe0f3',
+    version: ''
+  }
+
+  var res = await axios.put(url, data, headers)
+
+  console.log("res: ", res.data);
+  if(res && res.data && res.data.transactionId) {
+    return {transactionId: res.data.transactionId};
+  } else {
+    return {error: "error occured"};
+  }
+});
