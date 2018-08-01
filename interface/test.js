@@ -22,7 +22,7 @@ app.route.put('/withdrawal', async function (req, cb) {
   let options = {
     fee: fee,
     type: type,
-    args: JSON.stringify(['XAS', '10000000000'])
+    args: JSON.stringify(['BEL', '10000000000'])
   }
   let secret = req.query.secret;
 
@@ -46,7 +46,7 @@ app.route.put('/withdrawal', async function (req, cb) {
   if(res && res.data && res.data.transactionId) {
     return {transactionId: res.data.transactionId};
   } else {
-    return {error: "error occured"};
+    return {error: res.data.error};
   }
 });
 
@@ -56,7 +56,7 @@ app.route.put('/transactions/inTransfer', async function (req, cb) {
   let options = {
     fee: fee,
     type: type,
-    args: JSON.stringify(['XAS', '100000000'])
+    args: JSON.stringify(['XAS', '100000000', 'A4q6RGhAzKBBRHQg1X7NqXmrekrEe4YRZ7'])
   }
   let secret = req.query.secret;
 
@@ -65,10 +65,11 @@ app.route.put('/transactions/inTransfer', async function (req, cb) {
   let dappId = req.query.dappId;
 
   let url = `http://localhost:9305/api/dapps/${dappId}/transactions/signed`
+
   let data = {
     transaction: transaction
   }
-
+  
   let headers = {
     magic: '594fe0f3',
     version: ''
