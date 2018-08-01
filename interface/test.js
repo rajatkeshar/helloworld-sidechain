@@ -56,7 +56,7 @@ app.route.put('/transactions/inTransfer', async function (req, cb) {
   let options = {
     fee: fee,
     type: type,
-    args: JSON.stringify(['XAS', '100000000', 'A4q6RGhAzKBBRHQg1X7NqXmrekrEe4YRZ7'])
+    args: JSON.stringify(['BEL', '100000000', 'A4q6RGhAzKBBRHQg1X7NqXmrekrEe4YRZ7'])
   }
   let secret = req.query.secret;
 
@@ -69,7 +69,7 @@ app.route.put('/transactions/inTransfer', async function (req, cb) {
   let data = {
     transaction: transaction
   }
-  
+
   let headers = {
     magic: '594fe0f3',
     version: ''
