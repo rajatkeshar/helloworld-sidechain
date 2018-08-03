@@ -1,75 +1,99 @@
 var aschJS = require('asch-js');
-var axios = require('axios');
-var constants = require('./constants.js');
-var TransactionTypes = require('./transaction-types.js');
+var constants = require('../utils/constants.js');
+var TransactionTypes = require('../utils/transaction-types.js');
+var httpCall = require('../utils/httpCall.js');
 
+// OutTransfer
 app.route.put('/transactions/withdrawal', async function (req, cb) {
     console.log("calling outTransfer");
-    let fee = String(constants.fees.outTransfer * constants.fixedPoint);
-    let type = TransactionTypes.OUT_TRANSFER; // withdraw money to mainchain
-    let options = {
-      fee: fee,
-      type: type,
-      args: JSON.stringify([constants.defaultCurrency, req.query.amount])
+
+    var ac_params = {
+        secret: req.query.secret,
+        countryCode: req.query.countryCode
     };
-    let secret = req.query.secret;
+    var response = await httpCall.call('POST', `/api/accounts/open`, ac_params);
 
-    let transaction = aschJS.dapp.createInnerTransaction(options, secret)
+    if(response && response.account) {
+        if(response.account.status) {
+            let fee = String(constants.fees.outTransfer * constants.fixedPoint);
+            let type = TransactionTypes.OUT_TRANSFER; // withdraw money to mainchain
+            let options = {
+                fee: fee,
+                type: type,
+                args: JSON.stringify([constants.defaultCurrency, String(req.query.amount)])
+            };
+            let secret = req.query.secret;
 
-    let dappId = req.query.dappId;
+            let transaction = aschJS.dapp.createInnerTransaction(options, secret);
 
-    let url = `http://localhost:9305/api/dapps/${dappId}/transactions/signed`
-    let data = {
-      transaction: transaction
-    }
+            let dappId = req.query.dappId;
 
-    let headers = {
-      magic: '594fe0f3',
-      version: ''
-    }
+            let params = {
+                transaction: transaction
+            };
 
-    var res = await axios.put(url, data, headers)
+            var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
 
-    console.log("res: ", res.data);
-    if(res && res.data && res.data.transactionId) {
-      return {transactionId: res.data.transactionId};
+            return res;
+        } else {
+            return {error: "wallet not verified!"};
+        }
     } else {
-      return {error: res.data.error};
+        return response;
     }
-  });
+});
 
-  app.route.put('/transactions/inTransfer', async function (req, cb) {
+// InTransfer (Internal transfer in DAPP)
+app.route.put('/transactions/inTransfer', async function (req, cb) {
     console.log("calling inTransfer");
-    let fee = String(constants.fees.inTransfer * constants.fixedPoint);
-    let type = TransactionTypes.IN_TRANSFER; // transaction within sidechain
-    let options = {
-      fee: fee,
-      type: type,
-      args: JSON.stringify([constants.defaultCurrency, req.query.amount, req.query.recipientId])
-    }
-    let secret = req.query.secret;
 
-    let transaction = aschJS.dapp.createInnerTransaction(options, secret)
+    var ac_params = {
+        secret: req.query.secret,
+        countryCode: req.query.countryCode
+    };
+    var response = await httpCall.call('POST', `/api/accounts/open`, ac_params);
 
-    let dappId = req.query.dappId;
+    if(response && response.account) {
+        if(response.account.status) {
+            let fee = String(constants.fees.inTransfer * constants.fixedPoint);
+            let type = TransactionTypes.IN_TRANSFER; // transaction within sidechain
+            let options = {
+                fee: fee,
+                type: type,
+                args: JSON.stringify([constants.defaultCurrency, String(req.query.amount), req.query.recipientId])
+            }
+            let secret = req.query.secret;
 
-    let url = `http://localhost:9305/api/dapps/${dappId}/transactions/signed`
+            let transaction = aschJS.dapp.createInnerTransaction(options, secret);
 
-    let data = {
-      transaction: transaction
-    }
-    console.log("data: ", data);
-    let headers = {
-      magic: '594fe0f3',
-      version: ''
-    }
+            let dappId = req.query.dappId;
 
-    var res = await axios.put(url, data, headers)
+            let params = {
+                transaction: transaction
+            };
 
-    console.log("res: ", res.data);
-    if(res && res.data && res.data.transactionId) {
-      return {transactionId: res.data.transactionId};
+            var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
+
+            return res;
+        } else {
+            return {error: "wallet not verified!"};
+        }
     } else {
-      return {error: "error occured"};
+        return response;
     }
-  });
+});
+
+// Get Account Details
+app.route.post('/accounts',  async function (req) {
+    console.log("calling get account details");
+    var params = {
+        secret: req.query.secret,
+        countryCode: req.query.countryCode
+    };
+
+    console.log("params: ", params);
+
+    var res = await httpCall.call('POST', `/api/accounts/open`, params);
+
+    return res;
+})
