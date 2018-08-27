@@ -18,6 +18,10 @@ app.route.put('/transactions/withdrawal', async function (req, cb) {
     };
     var response = await httpCall.call('POST', `/api/accounts/open`, ac_params);
 
+    if(response && !response.success) {
+        return response;
+    }
+    
     if(response && response.account) {
 
         if(!response.account.status) {
