@@ -12,7 +12,7 @@ module.exports = {
 				headers:{
 					'Content-Type':'application/json',
 					'magic': '594fe0f3',
-      				'version': ''
+      		'version': ''
 				},
 				body: JSON.stringify(payload)
 			};
