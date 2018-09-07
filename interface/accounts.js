@@ -7,7 +7,7 @@ var z_schema = require('../utils/zschema-express.js');
 var TransactionTypes = require('../utils/transaction-types.js');
 
 // Get Account Details by Secret of User
-app.route.post('/open', async function (req, cb) {
+app.route.post('/accounts/open', async function (req, cb) {
     var validateSchema = await z_schema.validate(req.query, schema.open);
 
     var dappId = req.query.dappId;
@@ -31,7 +31,7 @@ app.route.post('/open', async function (req, cb) {
 });
 
 // Get Account Balance By Address
-app.route.post('/balance',  async function (req, cb) {
+app.route.post('/accounts/balance',  async function (req, cb) {
     var validateSchema = await z_schema.validate(req.query, schema.getBalance);
 
     var dappId = req.query.dappId;
