@@ -11,11 +11,11 @@ module.exports = {
         minLength: 1,
         maxLength: 100
       },
-      amount: {
+      /*amount: {
         type: "integer",
         minimum: 1,
         maximum: constants.totalSupply
-      },
+      },*/
       publicKey: {
         type: "string",
         format: "publicKey"
@@ -45,11 +45,11 @@ module.exports = {
         minLength: 1,
         maxLength: 100
       },
-      amount: {
+      /*amount: {
         type: "integer",
         minimum: 1,
         maximum: constants.totalSupply
-      },
+      },*/
       recipientId: {
         type: 'string',
         minLength: 1
