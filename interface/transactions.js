@@ -45,7 +45,7 @@ app.route.put('/transaction/withdrawal', async function (req, cb) {
             transaction: transaction
         };
 
-        var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
+        var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/unsigned`, params);
 
         return res;
 
@@ -127,7 +127,7 @@ app.route.put('/transaction/inTransfer', async function (req, cb) {
         transaction: transaction
     };
 
-    var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
+    var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/unsigned`, params);
 
     return res;
 });
