@@ -45,14 +45,14 @@ app.route.put('/transaction/withdrawal', async function (req, cb) {
             transaction: transaction
         };
 
-        var data = {
+        /*var data = {
            secret: secret,
            fee: fee,
            type: type,
            args: JSON.stringify([constants.defaultCurrency, String(req.query.amount)])
-       };
-       
-        var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/unsigned`, data);
+        };*/
+        console.log("outTransfer data: ", params);
+        var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
 
         return res;
 
@@ -134,14 +134,14 @@ app.route.put('/transaction/inTransfer', async function (req, cb) {
         transaction: transaction
     };
 
-    let newData = {
+    /*let newData = {
         secret: secret,
         fee: fee,
         type: type, // internal transfer
         args: JSON.stringify([constants.defaultCurrency, String(req.query.amount), recipientId])
-    };
-
-    var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/unsigned`, newData);
+    };*/
+    console.log("inTransfer data: ", params);
+    var res = await httpCall.call('PUT', `/api/dapps/${dappId}/transactions/signed`, params);
 
     return res;
 });
