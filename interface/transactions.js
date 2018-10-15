@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var aschJS = require('asch-js');
+var belriumJS = require('belrium-js');
 var ed = require('../utils/ed.js');
 var httpCall = require('../utils/httpCall.js');
 var constants = require('../utils/constants.js');
@@ -37,7 +37,7 @@ app.route.put('/transaction/withdrawal', async function (req, cb) {
         };
         let secret = req.query.secret;
 
-        let transaction = aschJS.dapp.createInnerTransaction(options, secret);
+        let transaction = belriumJS.dapp.createInnerTransaction(options, secret);
 
         let dappId = req.query.dappId;
 
@@ -126,7 +126,7 @@ app.route.put('/transaction/inTransfer', async function (req, cb) {
     }
     let secret = req.query.secret;
 
-    let transaction = aschJS.dapp.createInnerTransaction(options, secret);
+    let transaction = belriumJS.dapp.createInnerTransaction(options, secret);
 
     let dappId = req.query.dappId;
 

@@ -1,4 +1,4 @@
-var aschJS = require('asch-js');
+var belriumJS = require('belrium-js');
 var schema = require('../schema/accounts.js');
 var httpCall = require('../utils/httpCall.js');
 var constants = require('../utils/constants.js');
