@@ -1,4 +1,4 @@
-var belriumJS = require('belrium-js');
+var belriumJS = require('chain-js');
 var axios = require('axios');
 
 app.route.get('/test',  async function (req) {
