@@ -6,6 +6,7 @@ module.exports = {
   fees: {
     send: 0.1,
     inTransfer: 0.1,
-    outTransfer: 0.1
+    outTransfer: 0.1,
+    set: 0.1
   }
 }
