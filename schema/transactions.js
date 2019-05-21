@@ -28,14 +28,9 @@ module.exports = {
       dappId: {
         type: "string",
         format: "publicKey"
-      },
-      countryCode: {
-        type: 'string',
-        minLength: 2,
-        maxLength: 2
       }
     },
-    required: ['secret', 'amount', 'dappId', 'countryCode']
+    required: ['secret', 'amount', 'dappId']
   },
   inTransfer: {
     type: 'object',
@@ -66,18 +61,8 @@ module.exports = {
       dappId: {
         type: "string",
         format: "publicKey"
-      },
-      senderCountryCode: {
-        type: 'string',
-        minLength: 2,
-        maxLength: 2
-      },
-      recepientCountryCode: {
-        type: 'string',
-        minLength: 2,
-        maxLength: 2
       }
     },
-    required: ['secret', 'amount', 'recipientId', 'dappId', 'senderCountryCode', 'recepientCountryCode']
+    required: ['secret', 'amount', 'recipientId', 'dappId']
   }
 };
