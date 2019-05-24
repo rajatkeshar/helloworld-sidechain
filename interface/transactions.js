@@ -82,13 +82,13 @@ app.route.get('/transaction/unconfirmed',  async function (req) {
 
     var res = await httpCall.call('GET', `/api/dapps/${dappId}/transactions/unconfirmed?offset=${offset}&limit=${limit}`);
 
-    res.transactions.forEach(function(trs, index) {
-        trs.args = JSON.parse(trs.args);
-        trs.recipientId = addressHelper.isBase58CheckAddress(trs.args[trs.args.length-1])? trs.args[trs.args.length-1]: null;
-        trs.currency = trs.args[0];
-        trs.amount = parseInt(trs.args[1]);
-        delete trs.args;
-    });
+    // res.transactions.forEach(function(trs, index) {
+    //     trs.args = JSON.parse(trs.args);
+    //     trs.recipientId = addressHelper.isBase58CheckAddress(trs.args[trs.args.length-1])? trs.args[trs.args.length-1]: null;
+    //     trs.currency = trs.args[0];
+    //     trs.amount = parseInt(trs.args[1]);
+    //     delete trs.args;
+    // });
 
     return res;
 });
@@ -101,13 +101,13 @@ app.route.get('/transaction/confirmed',  async function (req) {
 
     var res = await httpCall.call('GET', `/api/dapps/${dappId}/transactions?offset=${offset}&limit=${limit}`);
 
-    res.transactions.forEach(function(trs, index) {
-        trs.args = JSON.parse(trs.args);
-        trs.recipientId = addressHelper.isBase58CheckAddress(trs.args[trs.args.length-1])? trs.args[trs.args.length-1]: null;
-        trs.currency = trs.args[0];
-        trs.amount = parseInt(trs.args[1]);
-        delete trs.args;
-    });
+    // res.transactions.forEach(function(trs, index) {
+    //     trs.args = JSON.parse(trs.args);
+    //     trs.recipientId = addressHelper.isBase58CheckAddress(trs.args[trs.args.length-1])? trs.args[trs.args.length-1]: null;
+    //     trs.currency = trs.args[0];
+    //     trs.amount = parseInt(trs.args[1]);
+    //     delete trs.args;
+    // });
 
     return res;
 });
