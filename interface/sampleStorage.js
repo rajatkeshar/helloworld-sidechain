@@ -18,7 +18,7 @@ app.route.put('/set',  async function (req) {
 
     let transaction = chainJS.dapp.createInnerTransaction(options, secret);
 
-    let dappId = req.query.dappId;
+    let dappId = app.id;
 
     let params = {
         transaction: transaction
