@@ -1,7 +1,7 @@
 var TransactionTypes = require('../utils/transaction-types.js');
 var constants = require('../utils/constants.js');
 var httpCall = require('../utils/httpCall.js');
-var belriumJS = require('chain-js');
+var chainJS = require('chain-js');
 
 app.route.put('/set',  async function (req) {
     console.log("req: ", req);
@@ -16,9 +16,9 @@ app.route.put('/set',  async function (req) {
     };
     let secret = req.query.secret;
 
-    let transaction = belriumJS.dapp.createInnerTransaction(options, secret);
+    let transaction = chainJS.dapp.createInnerTransaction(options, secret);
 
-    let dappId = app.id;
+    let dappId = req.query.dappId;
 
     let params = {
         transaction: transaction

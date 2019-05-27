@@ -1,4 +1,4 @@
-var belriumJS = require('chain-js');
+var chainJS = require('chain-js');
 var httpCall = require('../utils/httpCall.js');
 var constants = require('../utils/constants.js');
 var schema = require('../schema/transactions.js');
@@ -18,7 +18,7 @@ app.route.put('/transaction/withdrawal', async function (req, cb) {
     };
     let secret = req.query.secret;
 
-    let transaction = belriumJS.dapp.createInnerTransaction(options, secret);
+    let transaction = chainJS.dapp.createInnerTransaction(options, secret);
 
     let dappId = app.id;
 
@@ -46,7 +46,7 @@ app.route.put('/transaction/inTransfer', async function (req, cb) {
         args: JSON.stringify([constants.defaultCurrency, String(req.query.amount), recipientId])
     }
 
-    let transaction = belriumJS.dapp.createInnerTransaction(options, secret);
+    let transaction = chainJS.dapp.createInnerTransaction(options, secret);
 
     let dappId = app.id;
 
