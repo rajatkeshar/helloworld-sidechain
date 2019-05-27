@@ -1,7 +1,5 @@
 'use strict';
 
-var constants = require('../utils/constants.js');
-
 module.exports = {
   outTransfer: {
     type: 'object',
@@ -30,7 +28,7 @@ module.exports = {
         format: "publicKey"
       }
     },
-    required: ['secret', 'amount', 'dappId']
+    required: ['secret', 'amount']
   },
   inTransfer: {
     type: 'object',
@@ -63,6 +61,6 @@ module.exports = {
         format: "publicKey"
       }
     },
-    required: ['secret', 'amount', 'recipientId', 'dappId']
+    required: ['secret', 'amount', 'recipientId']
   }
 };

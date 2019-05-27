@@ -39,15 +39,5 @@ module.exports = {
     var h1 = crypto.createHash('sha256').update(publicKey).digest()
     var h2 = crypto.createHash('ripemd160').update(h1).digest()
     return NORMAL_PREFIX + base58check.encode(h2)
-  },
-  generateAddressWithCountryCode: function (address, countryCode) {
-    return address + countryCode;
-  },
-  removeCountryCodeFromAddress: function (address) {
-      return address.slice(0, -2);
-  },
-  getCountryCodeFromAddress: function (address) {
-    var conCode = address.substring(address.length-2, address.lenght);
-    return conCode;
   }
 }
