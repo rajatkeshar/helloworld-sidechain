@@ -13,9 +13,9 @@
 
 ## Dapp master account
 ```
-    address: AHMCKebuL2nRYDgszf9J2KjVZzAw95WUyB
-    secret: frozen hour curious thunder relief accuse soccer region resource marine juice chicken
-    publicKey: a7cfd49d25ce247568d39b17fca221d9b2ff8402a9f6eb6346d2291a5c81374c
+    address: "AK9nkRQnfVWbSGvJLqAFyAPGzr2apsSfK8"
+    secret: "frozen hour curious thunder relief accuse soccer region resource marine juice chicken"
+    publicKey: "4600100dcf2ba6fcd4463c3bd8153302881ae048eb99720ef608629815576f1a"
 ```
 
 ## Dapp delegates
